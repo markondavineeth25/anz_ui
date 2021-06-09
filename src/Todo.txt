@@ -1,0 +1,12 @@
+
+
+- account name, balance, account type, status 
+
+
+                <div className="container">
+                    Account Type: <input type="text" name="accountType"/>
+                    Account Name: <input type="text" name="accountName" />
+                    <button className="btn btn-success" onClick={this.createNewAccount}>Create Account</button>
+                </div>
+
+
