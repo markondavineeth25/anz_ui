@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import AccountDataService from '../../api/AccountDataService';
 
 class ListTransactions extends React.Component {
