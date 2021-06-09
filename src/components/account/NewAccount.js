@@ -21,15 +21,15 @@ class NewAccount extends React.Component {
     validate(values) {
         let errors = {};
         console.log('validate.values:', values);
-        var letterNumber = /^[0-9a-zA-Z\-\s]+$/;
+        const letterNumber = /^[0-9a-zA-Z\-\s]+$/;
         this.setState({ showNewAccountMessage: false})
         
         if (!values.accountName) {
-            errors.accountName = 'Account Name empty'
+            errors.accountName = 'Account Name is empty'
         } else if (values.accountName===null || values.accountName.trim()==='') {
-            errors.accountName = 'Account Name empty'
+            errors.accountName = 'Account Name is empty'
         } else if (!(values.accountName.trim().match(letterNumber))) {
-            errors.accountName = 'Not alphanumeric'
+            errors.accountName = 'Only alphanumeric values are allowed'
         }
         console.log('validate.errors:', errors);
         return errors;
