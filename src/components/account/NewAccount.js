@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import AccountDataService from '../../api/AccountDataService';
+import { connect } from 'react-redux';
 
 class NewAccount extends React.Component {
 
@@ -60,10 +61,10 @@ class NewAccount extends React.Component {
 
     render() {
         let { accountType, accountName } = this.state;
-
+        console.log('props in new account outside:', this.props.uid)
         return (
             <div className="container">
-                <h1>Create a New Account</h1>
+                <h1>Hey {this.props.uid}, Create a New Account</h1>
                 <Formik
                 initialValues={{ accountType, accountName }}
                     validate={this.validate}
@@ -97,4 +98,8 @@ class NewAccount extends React.Component {
 
 }
 
-export default NewAccount;
+const mapStateToProps = (state) => ({
+    uid: state.uid
+  });
+
+export default connect(mapStateToProps)(NewAccount);
