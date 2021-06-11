@@ -1,5 +1,7 @@
 import React from 'react';
 import AccountDataService from '../../api/AccountDataService';
+import { accountsAction } from '../../actions/accounts';
+import { connect } from 'react-redux';
 
 class ListAccounts extends React.Component {
 
@@ -10,6 +12,7 @@ class ListAccounts extends React.Component {
             networkError: false
         };
         this.listTransactions = this.listTransactions.bind(this);
+        this.dispatchActiveAccounts = this.dispatchActiveAccounts.bind(this);
     }
 
     componentDidMount() {
@@ -17,16 +20,20 @@ class ListAccounts extends React.Component {
             .then(response => {
                 this.setState({ accounts: response.data });
                 this.setState({ networkError: false})
+                this.dispatchActiveAccounts(response.data);
             })
             .catch(error => {
-                console.log('Error in listAccount:', error);
                 this.setState({ networkError: true})
             }                
             );
     }
 
+    dispatchActiveAccounts(allAccounts) {
+        const activeAccounts = allAccounts.filter(account => account.status === 'Active');
+        this.props.dispatch(accountsAction(activeAccounts));
+    }
+
     listTransactions(id) {
-        console.log('list transactions: ',id);
         this.props.history.push(`/listTransactions/${id}`);
     }
 
@@ -75,4 +82,4 @@ class ListAccounts extends React.Component {
     }
 }
 
-export default ListAccounts;
+export default connect()(ListAccounts);

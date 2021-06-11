@@ -10,7 +10,6 @@ class AccountDataService {
     }
 
     createAccount(account) {
-        //console.log('executed service')
         return axios.post('http://localhost:8080/accounts/newAccount/', account);
     }
 }

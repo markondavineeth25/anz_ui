@@ -23,7 +23,6 @@ class LoginComponent extends React.Component {
     }
 
     loginClicked() {
-        console.log('login clicked:', this.state);
         if (this.state.username === "anzuser" && this.state.password === "password") {
             AuthenticationService.registerSuccesfulLogin(this.state.username, this.state.password);
             this.props.history.push(`/listaccounts/${this.state.username}`);

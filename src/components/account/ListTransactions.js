@@ -1,13 +1,16 @@
 import React from 'react';
 import AccountDataService from '../../api/AccountDataService';
+import { connect } from 'react-redux';
 
 class ListTransactions extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            transactions: []
+            transactions: [],
+            activeAccount: {}
         };
+        this.getAccountInfo = this.getAccountInfo.bind(this);
     }
 
     componentDidMount() {
@@ -16,12 +19,22 @@ class ListTransactions extends React.Component {
             .then(response => {
                 this.setState({ transactions: response.data });
             });
+            this.getAccountInfo();
+    }
+
+    getAccountInfo() {
+        const activeAccount = this.props.activeAccounts 
+            // eslint-disable-next-line eqeqeq
+            && this.props.activeAccounts.filter(account => account.id == this.props.match.params.id);
+        activeAccount && this.setState({ activeAccount: activeAccount[0] });
     }
 
     render() {
         return (
             <div>
                 <div className="container">
+                <p>Account Name: <span className="text-primary">{this.state.activeAccount.accountName}</span></p>
+                <p>Account Type: <span className="text-info">{this.state.activeAccount.accountType}</span></p>
                     <table className="table">
                         <thead>
                             <tr>
@@ -53,4 +66,11 @@ class ListTransactions extends React.Component {
     }
 }
 
-export default ListTransactions;
+const mapStateToProps = (state) => {
+    return {
+        test: 'test',
+        activeAccounts: state.accounts.accounts
+    }
+};
+
+export default connect(mapStateToProps)(ListTransactions);
