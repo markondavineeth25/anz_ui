@@ -1,6 +1,7 @@
 import React from 'react';
 import AccountDataService from '../../api/AccountDataService';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 class ListTransactions extends React.Component {
 
@@ -52,7 +53,7 @@ class ListTransactions extends React.Component {
                                     <tr>
                                         <td>{transaction.description}</td>
                                         <td>{transaction.transactionAmount}</td>
-                                        <td>{transaction.transactionAmount}</td>
+                                        <td>{moment(transaction.transactionDate).format('YYYY-MM-DD')}</td>
                                         <td>{transaction.transactionType}</td>
                                         </tr>
                                         </React.Fragment>
