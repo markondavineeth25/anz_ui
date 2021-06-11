@@ -21,7 +21,6 @@ class NewAccount extends React.Component {
 
     validate(values) {
         let errors = {};
-        console.log('validate.values:', values);
         const letterNumber = /^[0-9a-zA-Z\-\s]+$/;
         this.setState({ showNewAccountMessage: false})
         
@@ -32,14 +31,10 @@ class NewAccount extends React.Component {
         } else if (!(values.accountName.trim().match(letterNumber))) {
             errors.accountName = 'Only alphanumeric values are allowed'
         }
-        console.log('validate.errors:', errors);
         return errors;
     }
 
     onSubmit = (values) => {
-        console.log('onsubmit:', values);
-        
-
         let newAccountInfo = {
             accountType: values.accountType,
             accountName: values.accountName
@@ -51,20 +46,17 @@ class NewAccount extends React.Component {
                 this.setState({ networkError: false})
             })
             .catch(error => {
-                console.log('Error in listAccount:', error);
                 this.setState({ networkError: true})
             }                
             );
 
-        console.log('onsubmit: newAccountInfo:', newAccountInfo);
     }
 
     render() {
         let { accountType, accountName } = this.state;
-        console.log('props in new account outside:', this.props.uid)
         return (
             <div className="container">
-                <h1>Hey {this.props.uid}, Create a New Account</h1>
+                <h1>Hey {this.props.uid.uid}, Create a New Account</h1>
                 <Formik
                 initialValues={{ accountType, accountName }}
                     validate={this.validate}
