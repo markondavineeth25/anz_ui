@@ -23,7 +23,6 @@ class ListAccounts extends React.Component {
                 this.dispatchActiveAccounts(response.data);
             })
             .catch(error => {
-                console.log('Error in listAccount:', error);
                 this.setState({ networkError: true})
             }                
             );
@@ -35,7 +34,6 @@ class ListAccounts extends React.Component {
     }
 
     listTransactions(id) {
-        console.log('list transactions: ',id);
         this.props.history.push(`/listTransactions/${id}`);
     }
 

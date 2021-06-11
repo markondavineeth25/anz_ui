@@ -67,7 +67,6 @@ class ListTransactions extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('listTransactions: mapStateToProps:', state);
     return {
         test: 'test',
         activeAccounts: state.accounts.accounts
